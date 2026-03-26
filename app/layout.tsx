@@ -1,0 +1,18 @@
+import "./globals.css";
+
+export const metadata = {
+  title: "Hydropool konfigurátor",
+  description: "Prodejní konfigurátor Canadiana",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="cs">
+      <body>{children}</body>
+    </html>
+  );
+}
