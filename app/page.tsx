@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useMemo, useState } from "react";
 
 type Variant = {
@@ -12,7 +13,6 @@ type Variant = {
   power: string;
   loungers: number;
   notes: string;
-
 };
 
 type Product = {
@@ -630,4 +630,79 @@ export default function Page() {
               <SummaryRow label="Barvy" value={`${selectedShell?.name} / ${selectedCabinet?.name}`} />
               <SummaryRow label="Kryt" value={selectedCover?.name || ""} />
               <SummaryRow label="Základní cena" value={currency.format(variant.price)} />
-              <SummaryRow label="P
+              <SummaryRow label="Příslušenství" value={currency.format(accessoriesTotal)} />
+              <SummaryRow label="Doprava" value={currency.format(transportTotal)} />
+              <SummaryRow label="Instalace" value={currency.format(Number(installation || 0))} />
+              <SummaryRow label="Sleva" value={`− ${currency.format(discountAmount)}`} />
+
+              <div className="hr" />
+
+              <div className="totalRow">
+                <span>Celkem bez DPH</span>
+                <span>{currency.format(finalTotal)}</span>
+              </div>
+
+              <div className="subTotalRow">
+                <span className="muted">Celkem s DPH 12 %</span>
+                <span>{currency.format(vatTotal)}</span>
+              </div>
+
+              <div className="subTotalRow">
+                <span className="muted">Prodejní zobrazení</span>
+                <span>{currency.format(publicPrice)}</span>
+              </div>
+
+              <button className="button" onClick={downloadOffer}>
+                Export nabídky
+              </button>
+            </section>
+
+            <section className="card">
+              <h2>Text nabídky</h2>
+              <div className="offerBox">{offerText}</div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="field">
+      <label>{label}</label>
+      {children}
+    </div>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="stat">
+      <div className="statLabel">{label}</div>
+      <div className="statValue">{value}</div>
+    </div>
+  );
+}
+
+function SummaryRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="summaryRow">
+      <span className="summaryLabel">{label}</span>
+      <span className="summaryValue">{value}</span>
+    </div>
+  );
+}
