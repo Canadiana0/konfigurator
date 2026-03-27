@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Hydropool konfigurátor",
-  description: "Prodejní konfigurátor Canadiana",
+  title: "Konfigurátor",
+  description: "Testovací verze konfigurátoru",
 };
 
 export default function RootLayout({
